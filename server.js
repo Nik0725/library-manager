@@ -28,15 +28,6 @@ app.get('/', (req, res) => {
 // ⬇ Import User model at the top if not already imported
 const User = require('./models/User');
 
-// ⬇ Add this debug route to inspect stored user
-app.get('/api/users/debug', async (req, res) => {
-  try {
-    const user = await User.findOne({ email: 'nihe@example.com' });
-    res.json(user);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
 
 // MongoDB connection
 mongoose.connect(process.env.MONGO_URI)

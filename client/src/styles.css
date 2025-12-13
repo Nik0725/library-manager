@@ -1,0 +1,133 @@
+/* =========================
+   GLOBAL STYLES
+   ========================= */
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}
+
+/* =========================
+   NAVIGATION BAR STYLES
+   ========================= */
+
+nav {
+  background-color: #222;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+nav button {
+  background: none;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+nav button:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================
+   PAGE LAYOUT STYLES
+   ========================= */
+
+.page-container {
+  padding: 20px;
+}
+
+/* =========================
+   HOME PAGE STYLES
+   ========================= */
+/* (Add home-specific styles here later) */
+
+/* =========================
+   AUTH PAGES (LOGIN / REGISTER)
+   ========================= */
+
+form {
+  max-width: 300px;
+}
+
+form div {
+  margin-bottom: 10px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+}
+
+button {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+/* =========================
+   BOOKS PAGE STYLES
+   ========================= */
+   
+/* =========================
+   BOOK LIST STYLES
+   ========================= */
+
+.book-list {
+  list-style: disc;          
+  padding-left: 20px;
+}
+
+/* Each list item */
+.book-list li {
+  margin-bottom: 10px;
+}
+
+/* Wrapper inside li (flex lives here, not on li) */
+.book-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;                 
+}
+
+/* Book title text */
+.book-text {
+  font-weight: bold;        
+}
+
+/* Edit / Delete icons */
+.book-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.book-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.book-actions button:hover {
+  opacity: 0.7;
+}
