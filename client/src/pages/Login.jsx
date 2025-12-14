@@ -1,10 +1,13 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import api from '../api';
 
-function Login({setIsLoggedIn}) {
+function Login({ setIsLoggedIn }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+
+  const navigate = useNavigate(); // navigation hook
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,10 +21,13 @@ function Login({setIsLoggedIn}) {
       // Save token
       localStorage.setItem('token', response.data.token);
 
-      //Update login  state
+      // Update login state
       setIsLoggedIn(true);
 
       setMessage('Login successful');
+
+      // Redirect to Books page
+      navigate('/books');
     } catch (error) {
       setMessage('Invalid login');
     }
@@ -61,4 +67,3 @@ function Login({setIsLoggedIn}) {
 }
 
 export default Login;
-

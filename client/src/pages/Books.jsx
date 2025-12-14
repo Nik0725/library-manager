@@ -14,6 +14,9 @@ function Books() {
   // State for editing
   const [editingBookId, setEditingBookId] = useState(null);
 
+  // Check login status
+  const isLoggedIn = !!localStorage.getItem('token');
+
   // Fetch all books on page load
   useEffect(() => {
     fetchBooks();
@@ -29,7 +32,7 @@ function Books() {
     }
   };
 
-  // Handle create or update
+  // Handle create or update (logged-in users only)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -86,62 +89,63 @@ function Books() {
     <div className="page-container">
       <h1>Books</h1>
 
-      {/* Book Form */}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
+      {/* Book form - visible only when logged in */}
+      {isLoggedIn && (
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
 
-        <input
-          type="text"
-          placeholder="Author"
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
-          required
-        />
+          <input
+            type="text"
+            placeholder="Author"
+            value={author}
+            onChange={(e) => setAuthor(e.target.value)}
+            required
+          />
 
-        <input
-          type="text"
-          placeholder="ISBN"
-          value={isbn}
-          onChange={(e) => setIsbn(e.target.value)}
-          required
-        />
+          <input
+            type="text"
+            placeholder="ISBN"
+            value={isbn}
+            onChange={(e) => setIsbn(e.target.value)}
+            required
+          />
 
-        <input
-          type="date"
-          value={publishedDate}
-          onChange={(e) => setPublishedDate(e.target.value)}
-          required
-        />
+          <input
+            type="date"
+            value={publishedDate}
+            onChange={(e) => setPublishedDate(e.target.value)}
+            required
+          />
 
-        <button type="submit">
-          {editingBookId ? 'Update Book' : 'Add Book'}
-        </button>
-      </form>
+          <button type="submit">
+            {editingBookId ? 'Update Book' : 'Add Book'}
+          </button>
+        </form>
+      )}
 
-      {/* Book List */}
-      <ul>
+      {/* Book List - visible to everyone */}
+      <ul className="book-list">
         {books.map((book) => (
-          <li className="book-item">
-  <span className="book-text">
-    <strong>{book.title}</strong> by {book.author}
-    <em> ({book.status}) </em>
-  </span>
+          <li key={book._id} className="book-item">
+            <span className="book-text">
+              <strong>{book.title}</strong> by {book.author}
+              <em> ({book.status}) </em>
+            </span>
 
-  <span className="book-actions">
-    <button onClick={() => handleEdit(book)}>
-      ✏️
-    </button>
-    <button onClick={() => handleDelete(book._id)}>
-      🗑️
-    </button>
-  </span>
-</li>
+            {/* Edit/Delete buttons only for logged-in users */}
+            {isLoggedIn && (
+              <span className="book-actions">
+                <button onClick={() => handleEdit(book)}>✏️</button>
+                <button onClick={() => handleDelete(book._id)}>🗑️</button>
+              </span>
+            )}
+          </li>
         ))}
       </ul>
     </div>
